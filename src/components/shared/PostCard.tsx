@@ -1,5 +1,5 @@
 import { useUserContext } from "@/context/AuthContext";
-import { formatDateString } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
 import { Models } from "appwrite";
 import { Link } from "react-router-dom";
 import PostStats from "./PostStats";
@@ -30,7 +30,7 @@ const PostCard = ({ post }: PostCardProps) => {
             </p>
             <div className="flex-center gap-2 text-light-3">
               <p className="subtle-semibold lg:small-regular">
-                {formatDateString(post.$createdAt)}
+                {formatDate(post.$createdAt)}
               </p>
               -
               <p className="subtle-semibold lg:small-regular">
@@ -39,6 +39,7 @@ const PostCard = ({ post }: PostCardProps) => {
             </div>
           </div>
         </div>
+        
         <Link to={`/update-post/${post.$id}`}
           className={'${user.id !== post.creator.$id && "hidden"}'}
         >

@@ -70,7 +70,7 @@ export async function getCurrentUser() {
     const currentAccount = await account.get();
 
     if (!currentAccount) throw Error;
-    const currentUser = await databases.listDocuments(
+    const  currentUser = await databases.listDocuments(
       appwriteConfig.databaseId,
       appwriteConfig.userCollectionId,
       [Query.equal('accountId', currentAccount.$id)]
@@ -327,5 +327,43 @@ export async function deletePost(postId: string, imageId: string) {
     return {status: 'ok'}
   } catch (error) {
     console.log(error);
+  }
+}
+
+export async function getInfinitePosts({ pageParam }: {pageParam: number}) {
+  const queries: any[] = [Query.orderDesc('$updatedAt'), Query.limit(10)]
+
+  if(pageParam) {
+    queries.push(Query.cursorAfter(pageParam.toString()));
+  }
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      queries
+    )
+
+    if(!posts) throw Error;
+
+    return posts;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function searchPosts(searchTerm: string) {
+  
+  try {
+    const posts = await databases.listDocuments(
+      appwriteConfig.databaseId,
+      appwriteConfig.postCollectionId,
+      [Query.search('caption', searchTerm)]
+    )
+
+    if(!posts) throw Error;
+
+    return posts;
+  } catch (error) {
+    console.log(error)
   }
 }
