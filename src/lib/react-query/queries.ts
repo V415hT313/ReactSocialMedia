@@ -60,7 +60,7 @@ import {
       queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
       queryFn: getInfinitePosts as any,
       getNextPageParam: (lastPage: any) => {
-        if (lastPage && lastPage.documents.length === 0){
+        if (lastPage && lastPage.documents.length === 0) {
           return null;
         }
 
