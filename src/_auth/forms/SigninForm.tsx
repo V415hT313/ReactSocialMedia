@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Loader from "@/components/shared/loader";
+import Loader from "@/components/shared/Loader";
 import { useToast } from "@/components/ui/use-toast";
 
 import { SigninValidation } from "@/lib/validation";
@@ -19,7 +19,7 @@ const SigninForm = () => {
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
 
   // Query
-  const { mutateAsync: signInAccount, isLoading } = useSignInAccount();
+  const { mutateAsync: signInAccount, isPending } = useSignInAccount();
 
   const form = useForm<z.infer<typeof SigninValidation>>({
     resolver: zodResolver(SigninValidation),
@@ -94,7 +94,7 @@ const SigninForm = () => {
           />
 
           <Button type="submit" className="shad-button_primary">
-            {isLoading || isUserLoading ? (
+            {isPending || isUserLoading ? (
               <div className="flex-center gap-2">
                 <Loader /> Loading...
               </div>

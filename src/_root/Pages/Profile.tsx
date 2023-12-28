@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import { Button } from "@/components/ui";
-import { LikedPosts } from "@/_root/pages";
+import { LikedPosts } from "@/_root/Pages";
 import { useUserContext } from "@/context/AuthContext";
 import { useGetUserById } from "@/lib/react-query/queries";
 import { GridPostList, Loader } from "@/components/shared";
