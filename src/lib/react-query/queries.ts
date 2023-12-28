@@ -2,7 +2,6 @@ import {
     useQuery,
     useMutation,
     useQueryClient,
-    useInfiniteQuery,
   } from "@tanstack/react-query";
   
   import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
@@ -21,7 +20,6 @@ import {
     getUserById,
     updateUser,
     getRecentPosts,
-    getInfinitePosts,
     searchPosts,
     savePost,
     deleteSavedPost,
@@ -55,21 +53,7 @@ import {
   // POST QUERIES
   // ============================================================
   
-  export const useGetPosts = () => {
-    return useInfiniteQuery({
-      queryKey: [QUERY_KEYS.GET_INFINITE_POSTS],
-      queryFn: getInfinitePosts as any,
-      getNextPageParam: (lastPage: any) => {
-        if (lastPage && lastPage.documents.length === 0) {
-          return null;
-        }
-
-        const lastId = lastPage.documents[lastPage.documents.length - 1].$id;
-        return lastId;
-
-      },
-    });
-  };  
+  
   
   export const useSearchPosts = (searchTerm: string) => {
     return useQuery({
