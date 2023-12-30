@@ -2,7 +2,7 @@ import {
   useQuery,
   useMutation,
   useQueryClient,
-  useInfiniteQuery,
+ 
 } from "@tanstack/react-query";
 
 import { QUERY_KEYS } from "@/lib/react-query/queryKeys";
@@ -21,7 +21,7 @@ import {
   getUserById,
   updateUser,
   getRecentPosts,
-  getInfinitePosts,
+ 
   searchPosts,
   savePost,
   deleteSavedPost,
